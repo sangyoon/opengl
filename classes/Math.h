@@ -36,20 +36,20 @@ public:
 		return *this;
 	}
 
-	Vec2& operator*=( const Vec2< T > &r )
+	Vec2& operator*=( float scale )
 	{
-		this->x *= r.x;
-		this->y *= r.y;
+		this->x *= scale;
+		this->y *= scale;
 
 		return *this;
 	}
 
 	Vec2 cross( const Vec2< T > &r ) const
 	{
-		const float _x = this->y * r.z - this->z * r.y;
-		const float _y = this->z * r.x - this->x * r.z;
+		const float x = this->y * r.z - this->z * r.y;
+		const float y = this->z * r.x - this->x * r.z;
 
-		return Vec2< T >( _x , _y );
+		return Vec2< T >( x , y );
 	}
 
 	Vec2< T > &normalize( void )
@@ -115,22 +115,22 @@ public:
 		return *this;
 	}
 
-	Vec3& operator*=( const Vec3< T > &r )
+	Vec3& operator*=( float scale )
 	{
-		this->x *= r.x;
-		this->y *= r.y;
-		this->z *= r.z;
+		this->x *= scale;
+		this->y *= scale;
+		this->z *= scale;
 
 		return *this;
 	}
 
 	Vec3 cross( const Vec3< T > &r ) const
 	{
-		const float _x = this->y * r.z - this->z * r.y;
-		const float _y = this->z * r.x - this->x * r.z;
-		const float _z = this->x * r.y - this->y * r.x;
+		const float x = this->y * r.z - this->z * r.y;
+		const float y = this->z * r.x - this->x * r.z;
+		const float z = this->x * r.y - this->y * r.x;
 
-		return Vec3< T >( _x , _y , _z );
+		return Vec3< T >( x , y , z );
 	}
 
 	Vec3< T > &normalize( void )
@@ -142,6 +142,25 @@ public:
 		this->z /= length;
 		
 		return *this;
+	}
+
+	void rotate( float angle , const Vec3f axis )
+	{
+		const float sinHalfAngle = sinf( toRadian( angle / 2 ) );
+		const float cosHalfAngle = cosf( toRadian( angle / 2 ) );
+
+		const float rx = axis.x * sinHalfAngle;
+		const float ry = axis.y * sinHalfAngle;
+		const float rz = axis.z * sinHalfAngle;
+		const float rw = cosHalfAngle;
+
+		Quaternion rot( rx , ry , rz , rw );
+		Quaternion conj = rot.conjugate();
+		Quaternion w = rot * ( *this ) * conj;
+
+		this->x = w.x;
+		this->y = w.y;
+		this->z = w.z;
 	}
 
 	void print( void ) const
