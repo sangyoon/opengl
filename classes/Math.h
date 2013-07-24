@@ -144,7 +144,7 @@ public:
 		return *this;
 	}
 
-	void rotate( float angle , const Vec3f axis )
+	void rotate( float angle , const Vec3< T > &axis )
 	{
 		const float sinHalfAngle = sinf( toRadian( angle / 2 ) );
 		const float cosHalfAngle = cosf( toRadian( angle / 2 ) );
@@ -216,11 +216,76 @@ public:
 		return returnMat;
 	}
 
-	void initScaleTransform( float scaleX , float scaleY , float scaleZ );
-	void initRotateTransform( float rotateX , float rotateY , float rotateZ );
-	void initTranslationTransform( float x , float y , float z );
-	void initCameraTransform( const Vec3f &target , const Vec3f &up );
-	void initPerspectiveProjectionTransform( float FOV , float width , float height , float zNear, float zFar);
+	void initScaleTransform( float x , float y , float z )
+	{
+		this->m[ 0 ][ 0 ] = x;		this->m[ 0 ][ 1 ] = 0.0f;	this->m[ 0 ][ 2 ] = 0.0f;	this->m[ 0 ][ 3 ] = 0.0f;
+		this->m[ 1 ][ 0 ] = 0.0f;	this->m[ 1 ][ 1 ] = y;		this->m[ 1 ][ 2 ] = 0.0f;	this->m[ 1 ][ 3 ] = 0.0f;
+		this->m[ 2 ][ 0 ] = 0.0f;	this->m[ 2 ][ 1 ] = 0.0f;	this->m[ 2 ][ 2 ] = z;		this->m[ 2 ][ 3 ] = 0.0f;
+		this->m[ 3 ][ 0 ] = 0.0f;	this->m[ 3 ][ 1 ] = 0.0f;	this->m[ 3 ][ 2 ] = 0.0f;	this->m[ 3 ][ 3 ] = 1.0f;
+	}
+
+	void initRotateTransform( float _x , float _y , float _z )
+	{
+		Mat4f rx, ry, rz;
+
+		const float x = toRadian( _x );
+		const float y = toRadian( _y );
+		const float z = toRadian( _z );
+
+		rx.m[ 0 ][ 0 ] = 1.0f; rx.m[ 0 ][ 1 ] = 0.0f;		rx.m[ 0 ][ 2 ] = 0.0f;			rx.m[ 0 ][ 3 ] = 0.0f;
+		rx.m[ 1 ][ 0 ] = 0.0f; rx.m[ 1 ][ 1 ] = cosf( x );	rx.m[ 1 ][ 2 ] = -sinf( x );	rx.m[ 1 ][ 3 ] = 0.0f;
+		rx.m[ 2 ][ 0 ] = 0.0f; rx.m[ 2 ][ 1 ] = sinf( x );	rx.m[ 2 ][ 2 ] = cosf( x );		rx.m[ 2 ][ 3 ] = 0.0f;
+		rx.m[ 3 ][ 0 ] = 0.0f; rx.m[ 3 ][ 1 ] = 0.0f;		rx.m[ 3 ][ 2 ] = 0.0f;			rx.m[ 3 ][ 3 ] = 1.0f;
+
+		ry.m[ 0 ][ 0 ] = cosf( y );	ry.m[ 0 ][ 1 ] = 0.0f;	ry.m[ 0 ][ 2 ] = -sinf( y );	ry.m[ 0 ][ 3 ] = 0.0f;
+		ry.m[ 1 ][ 0 ] = 0.0f;		ry.m[ 1 ][ 1 ] = 1.0f;	ry.m[ 1 ][ 2 ] = 0.0f;			ry.m[ 1 ][ 3 ] = 0.0f;
+		ry.m[ 2 ][ 0 ] = sinf( y ); ry.m[ 2 ][ 1 ] = 0.0f;	ry.m[ 2 ][ 2 ] = cosf( y );		ry.m[ 2 ][ 3 ] = 0.0f;
+		ry.m[ 3 ][ 0 ] = 0.0f;		ry.m[ 3 ][ 1 ] = 0.0f;	ry.m[ 3 ][ 2 ] = 0.0f;			ry.m[ 3 ][ 3 ] = 1.0f;
+
+		rz.m[ 0 ][ 0 ] = cosf( z ); rz.m[ 0 ][ 1 ] = -sinf( z );	rz.m[ 0 ][ 2 ] = 0.0f;	rz.m[ 0 ][ 3 ] = 0.0f;
+		rz.m[ 1 ][ 0 ] = sinf( z ); rz.m[ 1 ][ 1 ] = cosf( z );		rz.m[ 1 ][ 2 ] = 0.0f;	rz.m[ 1 ][ 3 ] = 0.0f;
+		rz.m[ 2 ][ 0 ] = 0.0f;		rz.m[ 2 ][ 1 ] = 0.0f;			rz.m[ 2 ][ 2 ] = 1.0f;	rz.m[ 2 ][ 3 ] = 0.0f;
+		rz.m[ 3 ][ 0 ] = 0.0f;		rz.m[ 3 ][ 1 ] = 0.0f;			rz.m[ 3 ][ 2 ] = 0.0f;	rz.m[ 3 ][ 3 ] = 1.0f;
+
+		*this = rz * ry * rx;
+	}
+
+	void initTranslationTransform( float x , float y , float z )
+	{
+		this->m[ 0 ][ 0 ] = 1.0f; this->m[ 0 ][ 1 ] = 0.0f; this->m[ 0 ][ 2 ] = 0.0f; this->m[ 0 ][ 3 ] = x;
+		this->m[ 1 ][ 0 ] = 0.0f; this->m[ 1 ][ 1 ] = 1.0f; this->m[ 1 ][ 2 ] = 0.0f; this->m[ 1 ][ 3 ] = y;
+		this->m[ 2 ][ 0 ] = 0.0f; this->m[ 2 ][ 1 ] = 0.0f; this->m[ 2 ][ 2 ] = 1.0f; this->m[ 2 ][ 3 ] = z;
+		this->m[ 3 ][ 0 ] = 0.0f; this->m[ 3 ][ 1 ] = 0.0f; this->m[ 3 ][ 2 ] = 0.0f; this->m[ 3 ][ 3 ] = 1.0f;
+	}
+
+	void initCameraTransform( const Vec3f &target , const Vec3f &up )
+	{
+		Vec3f N = target;
+		N.normalize();
+
+		Vec3f U = up;
+		U.normalize();
+		U = U.cross( N );
+
+		Vec3f V = N.cross( U );
+
+		m[ 0 ][ 0 ] = U.x;	m[ 0 ][ 1 ] = U.y;	m[ 0 ][ 2 ] = U.z;	m[ 0 ][ 3 ] = 0.0f;
+		m[ 1 ][ 0 ] = U.x;	m[ 1 ][ 1 ] = V.y;	m[ 1 ][ 2 ] = V.z;	m[ 1 ][ 3 ] = 0.0f;
+		m[ 2 ][ 0 ] = U.x;	m[ 2 ][ 1 ] = N.y;	m[ 2 ][ 2 ] = N.z;	m[ 2 ][ 3 ] = 0.0f;
+		m[ 3 ][ 0 ] = 0.0f;	m[ 3 ][ 1 ] = 0.0f;	m[ 3 ][ 2 ] = 0.0f;	m[ 3 ][ 3 ] = 1.0f;
+	}
+
+	void initPerspectiveProjectionTransform( float FOV , float width , float height , float zNear , float zFar )
+	{
+		const float ar			= width / height;
+		const float zRange		= zNear - zFar;
+		const float tanHalfFOV	= tanf( toRadian( FOV / 2.0f ) );
+	
+		this->m[ 0 ][ 0 ] = 1.0f / ( tanHalfFOV * ar );	this->m[ 0 ][ 1 ] = 0.0f;						this->m[ 0 ][ 2 ] = 0.0f;						this->m[ 0 ][ 3 ] = 0.0f;
+		this->m[ 1 ][ 0 ] = 0.0f;						this->m[ 1 ][ 1 ] = 1.0f / ( tanHalfFOV * ar );	this->m[ 1 ][ 2 ] = 0.0f;						this->m[ 1 ][ 3 ] = 0.0f;
+		this->m[ 2 ][ 0 ] = 0.0f;						this->m[ 2 ][ 1 ] = 0.0f;						this->m[ 2 ][ 2 ] = ( -zNear -zFar ) / zRange;	this->m[ 2 ][ 3 ] = 2.0f * zFar * zNear / zRange;
+		this->m[ 3 ][ 0 ] = 0.0f;						this->m[ 3 ][ 1 ] = 0.0f;						this->m[ 3 ][ 2 ] = 1.0f;						this->m[ 3 ][ 3 ] = 0.0f;
+	}
 
 public:
 	float m[ 4 ][ 4 ];
