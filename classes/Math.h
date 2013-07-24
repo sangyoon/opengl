@@ -220,7 +220,7 @@ public:
 	void initRotateTransform( float rotateX , float rotateY , float rotateZ );
 	void initTranslationTransform( float x , float y , float z );
 	void initCameraTransform( const Vec3f &target , const Vec3f &up );
-	void initPersProjTransform( float FOV , float width , float height , float zNear, float zFar);
+	void initPerspectiveProjectionTransform( float FOV , float width , float height , float zNear, float zFar);
 
 public:
 	float m[ 4 ][ 4 ];
