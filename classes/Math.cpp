@@ -36,20 +36,20 @@ void Mat4f::initRotateTransform( float _x , float _y , float _z )
 	const float y = toRadian( _y );
 	const float z = toRadian( _z );
 
-	rx.m[ 0 ][ 0 ] = 1.0f; rx.m[ 0 ][ 1 ] = 0.0f;		rx.m[ 0 ][ 2 ] = 0.0f;			rx.m[ 0 ][ 3 ] = 0.0f;
-	rx.m[ 1 ][ 0 ] = 0.0f; rx.m[ 1 ][ 1 ] = cosf( x );	rx.m[ 1 ][ 2 ] = -sinf( x );	rx.m[ 1 ][ 3 ] = 0.0f;
-	rx.m[ 2 ][ 0 ] = 0.0f; rx.m[ 2 ][ 1 ] = sinf( x );	rx.m[ 2 ][ 2 ] = cosf( x );		rx.m[ 2 ][ 3 ] = 0.0f;
-	rx.m[ 3 ][ 0 ] = 0.0f; rx.m[ 3 ][ 1 ] = 0.0f;		rx.m[ 3 ][ 2 ] = 0.0f;			rx.m[ 3 ][ 3 ] = 1.0f;
+	rx.m[ 0 ][ 0 ] = 1.0f;		rx.m[ 0 ][ 1 ] = 0.0f;		rx.m[ 0 ][ 2 ] = 0.0f;		rx.m[ 0 ][ 3 ] = 0.0f;
+	rx.m[ 1 ][ 0 ] = 0.0f;		rx.m[ 1 ][ 1 ] = cosf( x );	rx.m[ 1 ][ 2 ] = -sinf( x );	rx.m[ 1 ][ 3 ] = 0.0f;
+	rx.m[ 2 ][ 0 ] = 0.0f;		rx.m[ 2 ][ 1 ] = sinf( x );	rx.m[ 2 ][ 2 ] = cosf( x );	rx.m[ 2 ][ 3 ] = 0.0f;
+	rx.m[ 3 ][ 0 ] = 0.0f;		rx.m[ 3 ][ 1 ] = 0.0f;		rx.m[ 3 ][ 2 ] = 0.0f;		rx.m[ 3 ][ 3 ] = 1.0f;
 
-	ry.m[ 0 ][ 0 ] = cosf( y );	ry.m[ 0 ][ 1 ] = 0.0f;	ry.m[ 0 ][ 2 ] = -sinf( y );	ry.m[ 0 ][ 3 ] = 0.0f;
-	ry.m[ 1 ][ 0 ] = 0.0f;		ry.m[ 1 ][ 1 ] = 1.0f;	ry.m[ 1 ][ 2 ] = 0.0f;			ry.m[ 1 ][ 3 ] = 0.0f;
-	ry.m[ 2 ][ 0 ] = sinf( y ); ry.m[ 2 ][ 1 ] = 0.0f;	ry.m[ 2 ][ 2 ] = cosf( y );		ry.m[ 2 ][ 3 ] = 0.0f;
-	ry.m[ 3 ][ 0 ] = 0.0f;		ry.m[ 3 ][ 1 ] = 0.0f;	ry.m[ 3 ][ 2 ] = 0.0f;			ry.m[ 3 ][ 3 ] = 1.0f;
+	ry.m[ 0 ][ 0 ] = cosf( y );	ry.m[ 0 ][ 1 ] = 0.0f;		ry.m[ 0 ][ 2 ] = -sinf( y );	ry.m[ 0 ][ 3 ] = 0.0f;
+	ry.m[ 1 ][ 0 ] = 0.0f;		ry.m[ 1 ][ 1 ] = 1.0f;		ry.m[ 1 ][ 2 ] = 0.0f;		ry.m[ 1 ][ 3 ] = 0.0f;
+	ry.m[ 2 ][ 0 ] = sinf( y );	ry.m[ 2 ][ 1 ] = 0.0f;		ry.m[ 2 ][ 2 ] = cosf( y );	ry.m[ 2 ][ 3 ] = 0.0f;
+	ry.m[ 3 ][ 0 ] = 0.0f;		ry.m[ 3 ][ 1 ] = 0.0f;		ry.m[ 3 ][ 2 ] = 0.0f;		ry.m[ 3 ][ 3 ] = 1.0f;
 
-	rz.m[ 0 ][ 0 ] = cosf( z ); rz.m[ 0 ][ 1 ] = -sinf( z );	rz.m[ 0 ][ 2 ] = 0.0f;	rz.m[ 0 ][ 3 ] = 0.0f;
-	rz.m[ 1 ][ 0 ] = sinf( z ); rz.m[ 1 ][ 1 ] = cosf( z );		rz.m[ 1 ][ 2 ] = 0.0f;	rz.m[ 1 ][ 3 ] = 0.0f;
-	rz.m[ 2 ][ 0 ] = 0.0f;		rz.m[ 2 ][ 1 ] = 0.0f;			rz.m[ 2 ][ 2 ] = 1.0f;	rz.m[ 2 ][ 3 ] = 0.0f;
-	rz.m[ 3 ][ 0 ] = 0.0f;		rz.m[ 3 ][ 1 ] = 0.0f;			rz.m[ 3 ][ 2 ] = 0.0f;	rz.m[ 3 ][ 3 ] = 1.0f;
+	rz.m[ 0 ][ 0 ] = cosf( z );	rz.m[ 0 ][ 1 ] = -sinf( z );	rz.m[ 0 ][ 2 ] = 0.0f;		rz.m[ 0 ][ 3 ] = 0.0f;
+	rz.m[ 1 ][ 0 ] = sinf( z );	rz.m[ 1 ][ 1 ] = cosf( z );	rz.m[ 1 ][ 2 ] = 0.0f;		rz.m[ 1 ][ 3 ] = 0.0f;
+	rz.m[ 2 ][ 0 ] = 0.0f;		rz.m[ 2 ][ 1 ] = 0.0f;		rz.m[ 2 ][ 2 ] = 1.0f;		rz.m[ 2 ][ 3 ] = 0.0f;
+	rz.m[ 3 ][ 0 ] = 0.0f;		rz.m[ 3 ][ 1 ] = 0.0f;		rz.m[ 3 ][ 2 ] = 0.0f;		rz.m[ 3 ][ 3 ] = 1.0f;
 
 	*this = rz * ry * rx;
 }
@@ -85,10 +85,10 @@ void Mat4f::initPerspectiveProjectionTransform( float FOV , float width , float 
 	const float zRange		= zNear - zFar;
 	const float tanHalfFOV	= tanf( toRadian( FOV / 2.0f ) );
 	
-	this->m[ 0 ][ 0 ] = 1.0f / ( tanHalfFOV * ar );	this->m[ 0 ][ 1 ] = 0.0f;				this->m[ 0 ][ 2 ] = 0.0f;						this->m[ 0 ][ 3 ] = 0.0f;
-	this->m[ 1 ][ 0 ] = 0.0f;						this->m[ 1 ][ 1 ] = 1.0f / tanHalfFOV;	this->m[ 1 ][ 2 ] = 0.0f;						this->m[ 1 ][ 3 ] = 0.0f;
-	this->m[ 2 ][ 0 ] = 0.0f;						this->m[ 2 ][ 1 ] = 0.0f;				this->m[ 2 ][ 2 ] = ( -zNear -zFar ) / zRange;	this->m[ 2 ][ 3 ] = 2.0f * zFar * zNear / zRange;
-	this->m[ 3 ][ 0 ] = 0.0f;						this->m[ 3 ][ 1 ] = 0.0f;				this->m[ 3 ][ 2 ] = 1.0f;						this->m[ 3 ][ 3 ] = 0.0f;
+	this->m[ 0 ][ 0 ] = 1.0f / ( tanHalfFOV * ar );	this->m[ 0 ][ 1 ] = 0.0f;		this->m[ 0 ][ 2 ] = 0.0f;			this->m[ 0 ][ 3 ] = 0.0f;
+	this->m[ 1 ][ 0 ] = 0.0f;			this->m[ 1 ][ 1 ] = 1.0f / tanHalfFOV;	this->m[ 1 ][ 2 ] = 0.0f;			this->m[ 1 ][ 3 ] = 0.0f;
+	this->m[ 2 ][ 0 ] = 0.0f;			this->m[ 2 ][ 1 ] = 0.0f;		this->m[ 2 ][ 2 ] = ( -zNear -zFar ) / zRange;	this->m[ 2 ][ 3 ] = 2.0f * zFar * zNear / zRange;
+	this->m[ 3 ][ 0 ] = 0.0f;			this->m[ 3 ][ 1 ] = 0.0f;		this->m[ 3 ][ 2 ] = 1.0f;			this->m[ 3 ][ 3 ] = 0.0f;
 }
 
 /* Quaternion */
@@ -127,9 +127,9 @@ Quaternion operator*( const Quaternion &l , const Quaternion &r )
 Quaternion operator*( const Quaternion &q , const Vec3f &v )
 {
 	const float w = - ( q.x * v.x ) - ( q.y * v.y ) - ( q.z * v.z );
-    const float x =   ( q.w * v.x ) + ( q.y * v.z ) - ( q.z * v.y );
-    const float y =   ( q.w * v.y ) + ( q.z * v.x ) - ( q.x * v.z );
-    const float z =   ( q.w * v.z ) + ( q.x * v.y ) - ( q.y * v.x );
+	const float x =   ( q.w * v.x ) + ( q.y * v.z ) - ( q.z * v.y );
+	const float y =   ( q.w * v.y ) + ( q.z * v.x ) - ( q.x * v.z );
+	const float z =   ( q.w * v.z ) + ( q.x * v.y ) - ( q.y * v.x );
 
 	return Quaternion( x , y , z, w );
 }
