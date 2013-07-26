@@ -8,7 +8,7 @@
 class Shader
 {
 private:
-    template< int N > GLuint compile( char const *( &source )[ N ] , GLuint shaderType );
+    	template< int N > GLuint compile( char const *( &source )[ N ] , GLuint shaderType );
 
 public:
 	template< int N , int M > Shader( GLchar const *( &vertextSource )[ N ] , GLchar const *( &fragmentSource )[ M ] );
