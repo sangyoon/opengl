@@ -2,7 +2,7 @@
 
 World::World(void)
 {
-	this->scale		= Vec3f( 1.0f , 1.0f , 1.0f );
+	this->scale	= Vec3f( 1.0f , 1.0f , 1.0f );
 	this->position	= Vec3f( 0.0f , 0.0f , 0.0f );
 	this->rotate	= Vec3f( 0.0f , 0.0f , 0.0f );
 }
@@ -30,7 +30,7 @@ void World::setRotate( float x , float y , float z )
 
 void World::setProjection( float FOV , float width , float height , float zNear , float zFar )
 {
-	this->projection.FOV		= FOV;
+	this->projection.FOV	= FOV;
 	this->projection.width	= width;
 	this->projection.height	= height;
 	this->projection.zNear	= zNear;
