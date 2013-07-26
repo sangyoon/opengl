@@ -9,9 +9,9 @@ Camera::Camera( int width , int height )
 	this->windowWidth	= width;
 	this->windowHeight	= height;
 
-	this->eye			= Vec3f( 0.0f , 0.0f , 0.0f );
-	this->cam			= Vec3f( 0.0f , 0.0f , 1.0f );
-	this->up			= Vec3f( 0.0f , 1.0f , 0.0f );
+	this->eye		= Vec3f( 0.0f , 0.0f , 0.0f );
+	this->cam		= Vec3f( 0.0f , 0.0f , 1.0f );
+	this->up		= Vec3f( 0.0f , 1.0f , 0.0f );
 
 	this->cam.normalize();
 
@@ -23,9 +23,9 @@ Camera::Camera( int width , int height , const Vec3f &e , const Vec3f &c , const
 	this->windowWidth	= width;
 	this->windowHeight	= height;
 
-	this->eye			= e;
-	this->cam			= c;
-	this->up			= u;
+	this->eye		= e;
+	this->cam		= c;
+	this->up		= u;
 
 	this->cam.normalize();
 	this->up.normalize();
@@ -51,10 +51,10 @@ void Camera::initialize( void )
 
 	this->angleV = -toDegree( asin( this->cam.y ) );
 
-	this->onTopEdge			= false;
-	this->onBottomEdge		= false;
-	this->onLeftEdge		= false;
-	this->onRightEdge		= false;
+	this->onTopEdge		= false;
+	this->onBottomEdge	= false;
+	this->onLeftEdge	= false;
+	this->onRightEdge	= false;
 
 	this->mousePosition.x	= this->windowWidth / 2;
 	this->mousePosition.y	= this->windowHeight / 2;
