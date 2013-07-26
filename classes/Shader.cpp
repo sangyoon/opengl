@@ -5,8 +5,8 @@ template< int N , int M > Shader::Shader( GLchar const *( &vertextSource )[ N ] 
 	this->shaderProgram = glCreateProgram();
 	assert( this->shaderProgram == 0 , !"Error Create Shader Program." );
 
-	this->vertexShader	 = compile( vertextSource , GL_VERTEX_SHADER );
-	this->fragmentShader = compile( fragmentSource , GL_FRAGMENT_SHADER );
+	this->vertexShader	= compile( vertextSource , GL_VERTEX_SHADER );
+	this->fragmentShader	= compile( fragmentSource , GL_FRAGMENT_SHADER );
 
 	glAttachShader( this->shaderProgram , this->vertexShader );
 	glAttachShader( this->shaderProgram , this->fragmentShader );
