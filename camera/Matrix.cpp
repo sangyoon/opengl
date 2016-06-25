@@ -2,8 +2,8 @@
 
 Matrix::Matrix( void )
 {
-	this->scaleVector			= math::Vec3f( 1.0f , 1.0f , 1.0f );
-	this->worldPosVector		= math::Vec3f( 0.0f , 0.0f , 0.0f );
+	this->scaleVector			    = math::Vec3f( 1.0f , 1.0f , 1.0f );
+	this->worldPosVector		  = math::Vec3f( 0.0f , 0.0f , 0.0f );
 	this->rotateInformVector	= math::Vec3f( 0.0f , 0.0f , 0.0f );
 }
 
@@ -32,7 +32,7 @@ void Matrix::rotate( float rotateX , float rotateY , float rotateZ )
 
 void Matrix::perspeciveProjection( float FOV , float width , float height ,  float zNear , float zFar )
 {
-	this->perspectiveProj.FOV		= FOV;
+	this->perspectiveProj.FOV		  = FOV;
 	this->perspectiveProj.width		= width;
 	this->perspectiveProj.height	= height;
 	this->perspectiveProj.zNear		= zNear;
@@ -43,7 +43,7 @@ void Matrix::setCamera(  const math::Vec3f &position , const math::Vec3f &target
 {
 	this->camera.position	= position;
 	this->camera.target		= target;
-	this->camera.up			= up;
+	this->camera.up			  = up;
 }
 
 const math::Mat4f* Matrix::getTranslation( void )
